@@ -9,7 +9,7 @@
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "/ecs/myreactapp",
+          "awslogs-group": "/ecs/webserver-react-nginx",
           "awslogs-region": "ca-central-1",
           "awslogs-stream-prefix": "ecs"
         }
@@ -20,11 +20,6 @@
           "hostPort": 3000,
           "protocol": "tcp",
           "containerPort": 3000
-        },
-        {
-          "hostPort": 80,
-          "protocol": "tcp",
-          "containerPort": 80
         }
       ],
       "command": [],
@@ -42,7 +37,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "840082233847.dkr.ecr.ca-central-1.amazonaws.com/myreactapp:latest",
+      "image": "rajeshjsaharan/mywebserver:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -59,18 +54,18 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "myreactapp"
+      "name": "react-app"
     }
   ],
   "placementConstraints": [],
-  "memory": "2048",
-  "taskRoleArn": null,
+  "memory": "1024",
+  "taskRoleArn": "arn:aws:iam::840082233847:role/ecsTaskExecutionRole",
   "compatibilities": [
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ca-central-1:840082233847:task-definition/myreactapp:1",
-  "family": "myreactapp",
+  "taskDefinitionArn": "arn:aws:ecs:ca-central-1:840082233847:task-definition/webserver-react-nginx:1",
+  "family": "webserver-react-nginx",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -88,19 +83,13 @@
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "ecs.capability.execution-role-ecr-pull"
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
     },
     {
       "targetId": null,
@@ -120,8 +109,11 @@
     "FARGATE"
   ],
   "networkMode": "awsvpc",
-  "runtimePlatform": null,
-  "cpu": "1024",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX",
+    "cpuArchitecture": null
+  },
+  "cpu": "256",
   "revision": 1,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
